@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+
+  <script defer src="scripts/functions.js"></script>
+  <script defer src="scripts/Mouse.js"></script>
+
+  <script defer src="scripts/App.js"></script>
+  <script defer src="scripts/scenes/Scene.js"></script>
+  <script defer src="scripts/scenes/PrepScene.js"></script>
+  <script defer src="scripts/scenes/ComputerScene.js"></script>
+
+  <script defer src="scripts/battlefield/Battlefield.js"></script>
+  <script defer src="scripts/battlefield/BattlefieldView.js"></script>
+
+  <script defer src="scripts/ship/Ship.js"></script>
+  <script defer src="scripts/ship/ShipView.js"></script>
+  <script defer src="scripts/shot/Shot.js"></script>
+  <script defer src="scripts/shot/ShotView.js"></script>
+
+  <script defer src="scripts/script.js"></script>
+</head>
+
+<body onmousedown="return false" onselectstart="return false">
+  <div class="battlefield-status">Ваш ход</div>
+  <div class="field">
+    <div id="battlefield" class="battlefield" data-side="player">
+      Поле игрока
+    </div>
+    <div class="battlefield " data-side="computer">
+      Поле компьютера
+    </div>
+  </div>
+  <div class="button">
+    <div class="button-actions" data-scene="preparation">
+      <button class="button-action" data-action="manual">
+        Ручная расстановка
+      </button>
+      <button class="button-action" data-action="randomize">
+        Автоматическая расстановка
+      </button>
+      <button class="button-action" data-computer="play" disabled>
+        Начать игру
+      </button>
+    </div>
+  
+    <div class="button-actions hidden" data-scene="computer"></div>
+  </div>
+
+</body>
+
+</html>

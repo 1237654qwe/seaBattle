@@ -1,0 +1,146 @@
+.field {
+  display: flex;
+}
+
+.button {
+  display: flex;
+  margin-top: 225px;
+}
+
+.button-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 40px;
+  margin-right: 125px;
+  
+}
+
+.button-actions button {
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+}
+
+.battlefield {
+  position: relative;
+  margin-top: 30px ;
+  margin-left: 30px
+}
+
+.battlefield-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: rgba(40, 46, 250, 0.05);
+}
+
+.battlefield-item {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(6, 25, 247, 0.15);
+}
+
+.battlefield-item__active {
+	background: rgba(123, 121, 255, 0.2);
+}
+
+.marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.marker-row {
+  left: -35px;
+}
+
+.marker-column {
+  top: -35px;
+}
+
+.battlefield-status {
+	text-align: center;
+	padding: 20px;
+}
+
+.ship {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: -3px;
+	border: 3px solid #0400ff;
+	background: rgba(0, 55, 255, 0.45);
+	width: 32px;
+	height: 32px;
+}
+
+.ship-row-1 {
+  width: 35px;
+}
+
+.ship-row-2 {
+	width: 70px;
+}
+
+.ship-row-3 {
+	width: 105px;
+}
+
+.ship-row-4 {
+	width: 140px;
+}
+
+.ship-column-1 {
+  height: 35px;
+}
+
+.ship-column-2 {
+	height: 70px;
+}
+
+.ship-column-3 {
+	height: 105px;
+}
+
+.ship-column-4 {
+	height: 140px;
+}
+
+.shot {
+	width: 35px;
+	height: 35px;
+	text-align: center;
+	display: flex;
+	position: absolute;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.shot-missed {
+	color: "black";
+}
+
+.shot-wounded {
+	background: #fd9e9e;
+	height: 32px;
+	width: 32px;
+	margin-right: 2px;
+	z-index: 1;
+}
+
+.shot-killed {
+	margin: -3px;
+	background: #ff6868;
+	border: 3px solid red;
+}
+
+.hidden {
+	display: none;
+}
