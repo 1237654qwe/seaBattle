@@ -142,6 +142,7 @@ class Battlefield {
           break
         }
       }
+
       if (placed) {
         Object.assign(ship, { x, y })
       }
@@ -278,13 +279,13 @@ class Battlefield {
     return true
   }
 
-  randomize(ShipClass = Ship) {
+  randomize() {
     this.removeAllShips()
 
     for (let size = 4; size >= 1; size--) {
       for (let n = 0; n < 5 - size; n++) {
         const direction = getRandomFrom("row", "column")
-        const ship = new ShipClass(size, direction)
+        const ship = new ShipView(size, direction)
 
         while (!ship.placed) {
           const x = getRandomBetween(0, 9)

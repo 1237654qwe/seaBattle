@@ -113,8 +113,8 @@ class PrepScene extends Scene {
 			}
 		}
 
-    // Врощаение
-		if (this.draggedShip && mouse.delta) {
+    // Врощение
+		if (this.draggedShip && mouse.right) {
 			this.draggedShip.toggleDirection()
 		}
 

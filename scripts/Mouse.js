@@ -12,8 +12,8 @@ class Mouse {
 
   left = false
   prevLeft = false
-  delta = 0
-  prevDelta = 0
+  right = false
+  prevRight = false
 
   constructor(elem) {
     this.elem = elem
@@ -22,7 +22,6 @@ class Mouse {
       this.x = e.clientX
       this.y = e.clientY
       this.under = true
-      this.delta = 0
     }
 
     elem.addEventListener("mousemove", (e) => {
@@ -47,6 +46,8 @@ class Mouse {
       common(e)
       if (e.which === 1) {
         this.left = true
+      } else if (e.which === 3) {
+        this.right = true
       }
 
     })
@@ -55,24 +56,18 @@ class Mouse {
       common(e)
       if (e.which === 1) {
         this.left = false
+      } else if (e.which === 3) {
+        this.right = false
       }
     })
-    elem.addEventListener("wheel", (e) => {
-      this.tick()
-      common(e)
 
-      this.x = e.clientX
-      this.y = e.clientY
-      this.delta = e.deltaY > 0 ? 1 : -1
-      this.under = true
-
-    })
   }
   tick() {
     this.prevX = this.x
     this.prevY = this.y
     this.prevUnder = this.under
     this.prevLeft = this.left
-    this.prevDelta = this.delta
+    this.prevRight = this.right
+    this.right = false
   }
 }
