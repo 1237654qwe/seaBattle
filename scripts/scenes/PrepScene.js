@@ -1,14 +1,16 @@
 const shipDatas = [
-  { size: 4, direction: "row", startX: 10, startY: 390 },
-  { size: 3, direction: "row", startX: 10, startY: 435 },
-  { size: 3, direction: "row", startX: 130, startY: 435 },
-  { size: 2, direction: "row", startX: 10, startY: 480 },
-  { size: 2, direction: "row", startX: 88, startY: 480 },
-  { size: 2, direction: "row", startX: 167, startY: 480 },
-  { size: 1, direction: "row", startX: 10, startY: 525 },
-  { size: 1, direction: "row", startX: 55, startY: 525 },
-  { size: 1, direction: "row", startX: 100, startY: 525 },
-  { size: 1, direction: "row", startX: 145, startY: 525 },
+  { size: 4, direction: "row", startX: 10, startY: 435, id: 1, form: "ordinary"  },
+  { size: 3, direction: "row", startX: 10, startY: 480, id: 2, form: "ordinary" },
+  { size: 3, direction: "row", startX: 130, startY: 480, id: 3, form: "ordinary" },
+  { size: 2, direction: "row", startX: 10, startY: 525, id: 4, form: "ordinary" },
+  { size: 2, direction: "row", startX: 88, startY: 525, id: 5, form: "ordinary" },
+  { size: 2, direction: "row", startX: 167, startY: 525, id: 6, form: "ordinary" },
+  { size: 1, direction: "row", startX: 10, startY: 570, id: 7, form: "ordinary" },
+  { size: 1, direction: "row", startX: 55, startY: 570, id: 8, form: "ordinary" },
+  { size: 1, direction: "row", startX: 100, startY: 570, id: 9, form: "ordinary" },
+  { size: 1, direction: "row", startX: 145, startY: 570, id: 10, form: "ordinary" },
+  { size: 3, direction: "row", startX: 250, startY: 435, id: 11, form: "corner" },
+  { size: 2, direction: "row", startX: 250, startY: 525, id: 12, form: "corner" },
 ]
 
 class PrepScene extends Scene {
@@ -52,71 +54,7 @@ class PrepScene extends Scene {
 
   update() {
 
-    document.onselectstart = function () {
-      window.getSelection().removeAllRanges();
-    };
-
-    const { mouse, player } = this.app
-
-		// Потенциально хотим начать тянуть корабль
-		if (!this.draggedShip && mouse.left && !mouse.pLeft) {
-			const ship = player.ships.find((ship) => ship.isUnder(mouse))
-
-			if (ship) {
-				const shipRect = ship.div.getBoundingClientRect()
-
-				this.draggedShip = ship
-				this.draggedOffsetX = mouse.x - shipRect.left
-				this.draggedOffsetY = mouse.y - shipRect.top
-
-				ship.x = null
-				ship.y = null
-			}
-		}
-
-    // Перетаскивание
-		if (mouse.left && this.draggedShip) {
-			const { left, top } = player.root.getBoundingClientRect()
-			const x = mouse.x - left - this.draggedOffsetX
-			const y = mouse.y - top - this.draggedOffsetY
-
-			this.draggedShip.div.style.left = `${x}px`
-			this.draggedShip.div.style.top = `${y}px`
-		}
-
-    // Бросание
-		if (!mouse.left && this.draggedShip) {
-			const ship = this.draggedShip
-			this.draggedShip = null
-
-			const { left, top } = ship.div.getBoundingClientRect()
-			const { width, height } = player.cells[0][0].getBoundingClientRect()
-
-			const point = {
-				x: left + width / 2,
-				y: top + height / 2,
-			}
-
-			const cell = player.cells
-				.flat()
-				.find((cell) => isUnderPoint(point, cell))
-
-			if (cell) {
-				const x = parseInt(cell.dataset.x)
-				const y = parseInt(cell.dataset.y)
-
-				player.removeShip(ship)
-				player.addShip(ship, x, y)
-			} else {
-				player.removeShip(ship)
-				player.addShip(ship)
-			}
-		}
-
-    // Врощение
-		if (this.draggedShip && mouse.right) {
-			this.draggedShip.toggleDirection()
-		}
+    const { player } = this.app
 
     if (player.complete) {
       document.querySelector('[data-computer="play"]').disabled = false
@@ -128,7 +66,7 @@ class PrepScene extends Scene {
   randomize () {
     this.app.player.randomize(ShipView)
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 12; i++) {
       this.app.player.ships[i].startX = shipDatas[i].startX
       this.app.player.ships[i].startY = shipDatas[i].startY
     }
@@ -137,10 +75,12 @@ class PrepScene extends Scene {
   manual () {
     this.app.player.removeAllShips()
 
-    for (const { size, direction, startX, startY } of shipDatas) {
-      const ship = new ShipView(size, direction, startX, startY)
+    for (const { size, direction, startX, startY, id, form } of shipDatas) {
+      const ship = new ShipView(size, direction, startX, startY, id, form)
       this.app.player.addShip(ship)
+      rotateShip(ship.div, this.app.player)
     }
+    dragAndDrop(this.app.player)
   }
 
   play () {
@@ -148,7 +88,7 @@ class PrepScene extends Scene {
     const withoutShipItems = matrix.flat().filter((item) => !item.ship)
     let untouchables = []
 
-    untouchables = getRandomShot(withoutShipItems, 30)
+    untouchables = getRandomShot(withoutShipItems, 50)
     this.app.start('computer', untouchables)
 
   }

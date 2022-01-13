@@ -25,13 +25,13 @@ class BattlefieldView extends Battlefield {
 		Object.assign(this, { root, table, dock, polygon, showShips })
 		root.append(table, dock, polygon)
 
-		for (let y = 0; y < 10; y++) {
+		for (let y = 0; y < 12; y++) {
 			const row = []
 			const tr = document.createElement("tr")
 			tr.classList.add("battlefield-row")
 			tr.dataset.y = y
 
-			for (let x = 0; x < 10; x++) {
+			for (let x = 0; x < 12; x++) {
 				const td = document.createElement("td")
 				td.classList.add("battlefield-item")
 				Object.assign(td.dataset, { x, y })
@@ -44,17 +44,17 @@ class BattlefieldView extends Battlefield {
 			this.cells.push(row)
 		}
 
-		for (let x = 0; x < 10; x++) {
+		for (let x = 0; x < 12; x++) {
 			const cell = this.cells[0][x]
 			const marker = document.createElement("div")
 
 			marker.classList.add("marker", "marker-column")
-			marker.textContent = "АБВГДЕЖЗИК"[x]
+			marker.textContent = "АБВГДЕЖЗИКЛМ"[x]
 
 			cell.append(marker)
 		}
 
-		for (let y = 0; y < 10; y++) {
+		for (let y = 0; y < 12; y++) {
 			const cell = this.cells[y][0]
 			const marker = document.createElement("div")
 

@@ -5,13 +5,18 @@ class ShipView extends Ship {
   startX = null
   startY = null
 
-  constructor(size, direction, startX, startY) {
-		super(size, direction)
+  constructor(size, direction, startX, startY, id, form) {
+		super(size, direction, id, form)
 
 		const div = document.createElement("div")
 		div.classList.add("ship")
+		div.setAttribute('draggable', 'true')
+		div.setAttribute('size', `${this.size}`)
+		div.setAttribute('data-id', `${id}`)
+		div.setAttribute('form', `${form}`)
 
-		Object.assign(this, { div, startX, startY })
+
+		Object.assign(this, { div, startX, startY, id, form })
 
 		this.setDirection(direction, true)
 	}
@@ -21,9 +26,15 @@ class ShipView extends Ship {
 			return false
 		}
 
-		this.div.classList.remove(`ship-${this.direction}-${this.size}`)
-		this.direction = newDirection
-		this.div.classList.add(`ship-${this.direction}-${this.size}`)
+		if (this.form === "ordinary") {
+			this.div.classList.remove(`ship-${this.direction}-${this.size}`)
+			this.direction = newDirection
+			this.div.classList.add(`ship-${this.direction}-${this.size}`)
+		} else {
+			this.div.classList.remove(`ship-${this.direction}-${this.size}-${this.form}`)
+			this.direction = newDirection
+			this.div.classList.add(`ship-${this.direction}-${this.size}-${this.form}`)
+		}
 
 		return true
 	}
@@ -36,4 +47,6 @@ class ShipView extends Ship {
 	isUnder(point) {
 		return isUnderPoint(point, this.div)
 	}
+
+
 }

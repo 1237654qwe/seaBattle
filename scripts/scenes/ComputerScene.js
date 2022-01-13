@@ -66,8 +66,8 @@ class ComputerScene extends Scene {
       }
 
       if (!this.playerTurn) {
-        const x = getRandomBetween(0, 9)
-        const y = getRandomBetween(0, 9)
+        const x = getRandomBetween(0, 11)
+        const y = getRandomBetween(0, 11)
 
         let inUntouchable = false
 
@@ -94,11 +94,5 @@ class ComputerScene extends Scene {
         this.status.textContent = "Ход комьютера:"
       }
     }
-  }
-
-  stop() {
-    const { player, computer } = this.app
-    computer.clear()
-    player.clear()
   }
 }
