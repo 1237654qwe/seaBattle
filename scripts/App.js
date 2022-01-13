@@ -7,7 +7,6 @@ class App {
   activeScene = null
 
   constructor(scenes = {}) {
-
     const mouse = new Mouse(document.body)
     const player = new BattlefieldView(true)
     const computer = new BattlefieldView(false)
@@ -26,6 +25,7 @@ class App {
     for (const scene of Object.values(this.scenes)) {
       scene.init()
     }
+    
     requestAnimationFrame(() => this.tick())
   }
 

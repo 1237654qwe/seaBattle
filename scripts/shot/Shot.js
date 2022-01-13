@@ -1,5 +1,4 @@
 class Shot {
-
   x = null
   y = null
   variant = null

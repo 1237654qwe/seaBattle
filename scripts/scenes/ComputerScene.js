@@ -24,7 +24,6 @@ class ComputerScene extends Scene {
     computer.randomize(ShipView)
 
     this.untouchables = untouchables
-
   }
 
   update() {
@@ -41,17 +40,16 @@ class ComputerScene extends Scene {
       } else {
         this.status.textContent = "Победа машины"
       }
+      
       return
     }
 
     if (isUnderPoint(mouse, computer.table)) {
       const cell = cells.find(cell => isUnderPoint(mouse, cell))
 
-
       if (cell) {
         cell.classList.add('battlefield-item__active')
 
-        //выстрел
         if (this.playerTurn && mouse.left && !mouse.prevLeft) {
           const x = parseInt(cell.dataset.x)
           const y = parseInt(cell.dataset.y)

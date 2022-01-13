@@ -1,5 +1,4 @@
 class Mouse {
-
   elem = null
 
   x = null
@@ -21,7 +20,7 @@ class Mouse {
     elem.addEventListener("click", (e) => {
       this.tick()
       common(e)
-        this.left = true
+      this.left = true
     })
   }
   

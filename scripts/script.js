@@ -3,5 +3,4 @@ const app = new App({
   computer: ComputerScene,
 })
 
-
 app.start("preparation")

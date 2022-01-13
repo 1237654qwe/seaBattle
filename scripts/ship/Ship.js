@@ -1,5 +1,4 @@
 class Ship {
-
   size = null
   direction = null
   id = null
@@ -10,7 +9,7 @@ class Ship {
   y = null
 
   get placed() {
-    return this.x !== null && this.y !== null
+    return (this.x !== null) && (this.y !== null)
   }
 
   constructor(size, direction, id, form) {

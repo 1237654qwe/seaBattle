@@ -21,7 +21,6 @@ class PrepScene extends Scene {
     this.play = this.play.bind(this)
 
     this.manual()
-
   }
 
   start() {
@@ -50,7 +49,6 @@ class PrepScene extends Scene {
     }
 
   update() {
-
     const { player } = this.app
 
     if (player.complete) {
@@ -77,6 +75,7 @@ class PrepScene extends Scene {
       this.app.player.addShip(ship)
       rotateShip(ship.div, this.app.player)
     }
+    
     dragAndDrop(this.app.player)
   }
 
@@ -87,7 +86,5 @@ class PrepScene extends Scene {
 
     untouchables = getRandomShot(withoutShipItems, 50)
     this.app.start('computer', untouchables)
-
   }
-
 }

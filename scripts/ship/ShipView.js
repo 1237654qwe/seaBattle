@@ -1,5 +1,4 @@
 class ShipView extends Ship {
-
 	div = null
 
 	startX = null
@@ -14,7 +13,6 @@ class ShipView extends Ship {
 		div.setAttribute('size', `${this.size}`)
 		div.setAttribute('data-id', `${id}`)
 		div.setAttribute('form', `${form}`)
-
 
 		Object.assign(this, { div, startX, startY, id, form })
 

@@ -5,9 +5,7 @@ class Battlefield {
   #matrix = null
   #changed = true
 
-  constructor() {
-
-  }
+  constructor() {}
 
   get toLose() {
     for (const ship of this.ships) {
@@ -15,6 +13,7 @@ class Battlefield {
         return false
       }
     }
+
     return true
   }
 
@@ -50,6 +49,7 @@ class Battlefield {
       }
 
       const { x, y } = ship
+      const isCorner = ship.form === 'corner'
 
       const dx = ship.direction === 'row'
       const dy = ship.direction === 'column'
@@ -59,10 +59,10 @@ class Battlefield {
       if (ship.form === 'ordinary') {
         curFormY = 1
         curFormX = 1
-      } else if (ship.form === 'corner' && ship.direction === "row") {
+      } else if (isCorner && ship.direction === "row") {
         curFormY = 2
         curFormX = 0
-      } else if (ship.form === 'corner' && ship.direction === "column") {
+      } else if (isCorner && ship.direction === "column") {
         curFormY = 1
         curFormX = 2
       }
@@ -71,40 +71,40 @@ class Battlefield {
         for (let i = 0; i < ship.size; i++) {
           const cx = x + dx * i
           const cy = y + dy * i
-
           const item = matrix[cy][cx]
+
           item.ship = ship
         }
-      } else if (ship.size === 3 && ship.form === 'corner') {
+      } else if (ship.size === 3 && isCorner) {
         for (let a = 0; a < 2; a++) {
           const cx = x + dx * a
           const cy = y + dy * a
-
           const item = matrix[cy][cx]
+
           item.ship = ship
         }
 
         for (let b = 0; b < 2; b++) {
           const cx = (x + 1) + dx * b
           const cy = (y + 1) + dy * b
-
           const item = matrix[cy][cx]
+
           item.ship = ship
         }
-      } else if (ship.size === 2 && ship.form === 'corner') {
+      } else if (ship.size === 2 && isCorner) {
         for (let a = 0; a < 2; a++) {
           const cx = x + dx * a
           const cy = y + dy * a
-
           const item = matrix[cy][cx]
+
           item.ship = ship
         }
 
         for (let b = 0; b < 1; b++) {
           const cx = (x + 1) + dx * b
           const cy = (y + 1) + dy * b
-
           const item = matrix[cy][cx]
+
           item.ship = ship
         }
       }
@@ -113,6 +113,7 @@ class Battlefield {
         for (let x = ship.x - 1; x < ship.x + ship.size * dx + dy + curFormX; x++) {
           if (this.inField(x, y)) {
             const item = matrix[y][x]
+
             item.free = false
           }
         }
@@ -121,6 +122,7 @@ class Battlefield {
 
     for (const { x, y } of this.shots) {
       const item = matrix[y][x]
+
       item.shoted = true
 
       if (item.ship) {
@@ -144,6 +146,7 @@ class Battlefield {
         return false
       }
     }
+
     return true
   }
 
@@ -151,13 +154,11 @@ class Battlefield {
     const isNumber = (n) =>
       parseInt(n) === n && !isNaN(n) && ![Infinity, -Infinity].includes(n);
 
-
-
     if (!isNumber(x) || !isNumber(y)) {
       return false
     }
 
-    return 0 <= x && x < 12 && 0 <= y && y < 12
+    return (0 <= x) && (x < 12) && (0 <= y) && (y < 12)
   }
 
   addShip(ship, x, y) {
@@ -188,8 +189,7 @@ class Battlefield {
           if (!item.free) {
             placed = false
             break
-          }
-
+          }  
         } else {
           const cx = x + dx * i
           const cy = (y + 1) + dy * i
@@ -269,6 +269,7 @@ class Battlefield {
       const { ship } = matrix[y][x]
       const dx = ship.direction === "row"
       const dy = ship.direction === "column"
+      const isCorner = ship.form === 'corner'
 
       let killed = true
 
@@ -283,7 +284,7 @@ class Battlefield {
             break
           }
         }
-      } else if (ship.size === 3 && ship.form === 'corner') {
+      } else if (ship.size === 3 && isCorner) {
         for (let a = 0; a < 2; a++) {
           const cx = ship.x + dx * a
           const cy = ship.y + dy * a
@@ -307,7 +308,7 @@ class Battlefield {
             break
           }
         }
-      } else if (ship.size === 2 && ship.form === 'corner') {
+      } else if (ship.size === 2 && isCorner) {
         for (let a = 0; a < 2; a++) {
           const cx = ship.x + dx * a
           const cy = ship.y + dy * a
@@ -372,7 +373,7 @@ class Battlefield {
               this.addShot(newShot)
             })
           }
-        } else if (ship.size === 3 && ship.form === 'corner') {
+        } else if (ship.size === 3 && isCorner) {
           for (let a = 0; a < 2; a++) {
             const cx = ship.x + dx * a
             const cy = ship.y + dy * a
@@ -439,12 +440,12 @@ class Battlefield {
               if (item.y > 11) {
                 correctY = 11
               }
+
               const newShot = new ShotView(correctX, correctY)
               this.addShot(newShot)
-
             })
           }
-        } else if (ship.size === 2 && ship.form === 'corner') {
+        } else if (ship.size === 2 && isCorner) {
           for (let a = 0; a < 2; a++) {
             const cx = ship.x + dx * a
             const cy = ship.y + dy * a
