@@ -18,31 +18,17 @@ class Mouse {
       this.y = e.clientY
     }
 
-    elem.addEventListener("mousemove", (e) => {
+    elem.addEventListener("click", (e) => {
       this.tick()
       common(e)
-    })
-
-    elem.addEventListener("mousedown", (e) => {
-      this.tick()
-      common(e)
-      if (e.which === 1) {
         this.left = true
-      }
     })
-
-    elem.addEventListener("mouseup", (e) => {
-      this.tick()
-      common(e)
-      if (e.which === 1) {
-        this.left = false
-      }
-    })
-
   }
+  
   tick() {
     this.prevX = this.x
     this.prevY = this.y
+    this.left = false
     this.prevLeft = this.left
   }
 }
