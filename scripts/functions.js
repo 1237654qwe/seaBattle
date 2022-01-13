@@ -49,12 +49,12 @@ const getPositionsToMiss = (x, y, size, direction, form) => {
       }
     })
 
-    if(form === 'corner' && size === 2) {
-      rightPositionsToShoot.push({x: x+2,y: y+2}, {x: x+1,y: y}, {x: x+2,y: y-1})
+    if (form === 'corner' && size === 2) {
+      rightPositionsToShoot.push({ x: x + 2, y: y + 2 }, { x: x + 1, y: y }, { x: x + 2, y: y - 1 })
     }
 
-    if(form === 'corner' && size === 3) {
-      rightPositionsToShoot.push({x: x+2,y: y+3}, {x: x+1,y: y}, {x: x+2,y: y-1}, {x: x, y: y+2})
+    if (form === 'corner' && size === 3) {
+      rightPositionsToShoot.push({ x: x + 2, y: y + 3 }, { x: x + 1, y: y }, { x: x + 2, y: y - 1 }, { x: x, y: y + 2 })
     }
 
     const leftPositionsToShoot = arrayBySize.map((item, i) => {
@@ -118,14 +118,14 @@ const getPositionsToMiss = (x, y, size, direction, form) => {
       }
     })
 
-    if(form === 'corner' && size === 2) {
-      rightPositionsToShoot.push({y: y+2,x: x+2}, {y: y+1,x: x}, {y: y+2,x: x-1})
+    if (form === 'corner' && size === 2) {
+      rightPositionsToShoot.push({ y: y + 2, x: x + 2 }, { y: y + 1, x: x }, { y: y + 2, x: x - 1 })
     }
 
-    if(form === 'corner' && size === 3) {
-      rightPositionsToShoot.push({y: y+2,x: x+3}, {y: y+1,x: x}, {y: y+2,x: x-1}, {y: y, x: x+2})
+    if (form === 'corner' && size === 3) {
+      rightPositionsToShoot.push({ y: y + 2, x: x + 3 }, { y: y + 1, x: x }, { y: y + 2, x: x - 1 }, { y: y, x: x + 2 })
     }
-    
+
 
     const leftPositionsToShoot = arrayBySize.map((item, i) => {
       return {
@@ -181,7 +181,7 @@ const dragAndDrop = function (player) {
 
   const dragstart = function (e) {
     const id = e.target.dataset.id
-    const curShip = player.ships.find((item) => item.id === Number(id) )
+    const curShip = player.ships.find((item) => item.id === Number(id))
 
     ship = curShip
   }

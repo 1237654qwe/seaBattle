@@ -14,9 +14,6 @@ const shipDatas = [
 ]
 
 class PrepScene extends Scene {
-  draggedShip = null
-  draggedX = 0
-  draggedY = 0
 
   init() {
     this.randomize = this.randomize.bind(this)

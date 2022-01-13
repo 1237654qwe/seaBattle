@@ -54,7 +54,7 @@ class Battlefield {
       const dx = ship.direction === 'row'
       const dy = ship.direction === 'column'
       let curFormY = 0
-      let curFormX= 0
+      let curFormX = 0
 
       if (ship.form === 'ordinary') {
         curFormY = 1
@@ -81,7 +81,7 @@ class Battlefield {
           const cy = y + dy * a
 
           const item = matrix[cy][cx]
-          item.ship = ship  
+          item.ship = ship
         }
 
         for (let b = 0; b < 2; b++) {
@@ -109,9 +109,6 @@ class Battlefield {
         }
       }
 
-
-
-
       for (let y = ship.y - 1; y < ship.y + ship.size * dy + dx + curFormY; y++) {
         for (let x = ship.x - 1; x < ship.x + ship.size * dx + dy + curFormX; x++) {
           if (this.inField(x, y)) {
@@ -131,7 +128,6 @@ class Battlefield {
       }
     }
 
-   
     this.#matrix = matrix
     this.#changed = false
 
@@ -212,7 +208,7 @@ class Battlefield {
           }
 
           const item2 = this.matrix[cyCorner][cx]
-          
+
           if (!item2.free) {
             placed = false
             break
@@ -225,7 +221,6 @@ class Battlefield {
       }
     }
 
-    // console.log(this.matrix)
     this.#changed = true
     return true
   }
@@ -294,7 +289,7 @@ class Battlefield {
           const cy = ship.y + dy * a
 
           const item = matrix[cy][cx]
-          
+
           if (!item.wounded) {
             killed = false
             break
@@ -306,7 +301,7 @@ class Battlefield {
           const cy = (ship.y + 1) + dy * b
 
           const item = matrix[cy][cx]
-          
+
           if (!item.wounded) {
             killed = false
             break
@@ -318,7 +313,7 @@ class Battlefield {
           const cy = ship.y + dy * a
 
           const item = matrix[cy][cx]
-          
+
           if (!item.wounded) {
             killed = false
             break
@@ -330,7 +325,7 @@ class Battlefield {
           const cy = (ship.y + 1) + dy * b
 
           const item = matrix[cy][cx]
-          
+
           if (!item.wounded) {
             killed = false
             break
@@ -338,10 +333,8 @@ class Battlefield {
         }
       }
 
-
       if (killed) {
         ship.killed = true
-
 
         if (ship.form === 'ordinary') {
           for (let i = 0; i < ship.size; i++) {
@@ -377,7 +370,6 @@ class Battlefield {
 
               const newShot = new ShotView(correctX, correctY)
               this.addShot(newShot)
-
             })
           }
         } else if (ship.size === 3 && ship.form === 'corner') {
@@ -414,7 +406,6 @@ class Battlefield {
 
               const newShot = new ShotView(correctX, correctY)
               this.addShot(newShot)
-
             })
           }
 
@@ -448,7 +439,6 @@ class Battlefield {
               if (item.y > 11) {
                 correctY = 11
               }
-
               const newShot = new ShotView(correctX, correctY)
               this.addShot(newShot)
 
@@ -488,7 +478,6 @@ class Battlefield {
 
               const newShot = new ShotView(correctX, correctY)
               this.addShot(newShot)
-
             })
           }
 
@@ -525,7 +514,6 @@ class Battlefield {
 
               const newShot = new ShotView(correctX, correctY)
               this.addShot(newShot)
-
             })
           }
         }
@@ -562,10 +550,10 @@ class Battlefield {
   randomize() {
     this.removeAllShips()
 
-   for(let i = 0; i < 12; i++ ) {
-     const item = shipDatas[i]
-     const directon = getRandomFrom("row", "column")
-     const ship = new ShipView(item.size, directon, null, null, item.id, item.form)
+    for (let i = 0; i < 12; i++) {
+      const item = shipDatas[i]
+      const directon = getRandomFrom("row", "column")
+      const ship = new ShipView(item.size, directon, null, null, item.id, item.form)
 
       while (!ship.placed) {
         const x = getRandomBetween(0, 11)
@@ -574,8 +562,7 @@ class Battlefield {
         this.removeShip(ship)
         this.addShip(ship, x, y)
       }
-   }
-
+    }
   }
 
   clear() {

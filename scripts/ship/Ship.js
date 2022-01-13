@@ -9,7 +9,7 @@ class Ship {
   x = null
   y = null
 
-  get placed () {
+  get placed() {
     return this.x !== null && this.y !== null
   }
 
@@ -19,5 +19,4 @@ class Ship {
     this.id = id
     this.form = form
   }
-
 }

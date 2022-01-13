@@ -9,8 +9,8 @@ class Shot {
     this.y = y
     this.variant = variant
   }
-  
-  setVariant (variant) {
+
+  setVariant(variant) {
     this.variant = variant
   }
 }

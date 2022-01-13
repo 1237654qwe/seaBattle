@@ -1,11 +1,11 @@
 class ShipView extends Ship {
 
-  div = null
+	div = null
 
-  startX = null
-  startY = null
+	startX = null
+	startY = null
 
-  constructor(size, direction, startX, startY, id, form) {
+	constructor(size, direction, startX, startY, id, form) {
 		super(size, direction, id, form)
 
 		const div = document.createElement("div")
@@ -21,7 +21,7 @@ class ShipView extends Ship {
 		this.setDirection(direction, true)
 	}
 
-  setDirection(newDirection, force = false) {
+	setDirection(newDirection, force = false) {
 		if (!force && this.direction === newDirection) {
 			return false
 		}
@@ -39,7 +39,7 @@ class ShipView extends Ship {
 		return true
 	}
 
-  toggleDirection() {
+	toggleDirection() {
 		const newDirection = this.direction === "row" ? "column" : "row"
 		this.setDirection(newDirection)
 	}
@@ -47,6 +47,4 @@ class ShipView extends Ship {
 	isUnder(point) {
 		return isUnderPoint(point, this.div)
 	}
-
-
 }
